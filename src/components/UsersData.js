@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 const UsersData = () => {
+  const [Users, fetchUsers] =useState([])
+
+  const getData = () => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+      })
+  }
+  useEffect(() => {
+    getData()
+  }, [])
   return (
-    <div>UsersData</div>
+    <>
+      <h2>React Fetch API Example</h2>
+      <ul>
+        {Users.map((item, i) => {
+          return <li key={i}>{item.name}</li>
+        })}
+      </ul>
+    </>
   )
 }
 
